@@ -48,7 +48,7 @@ def get_trello_status():
         return response.json().get('name')
     return None
 
-@bot.command(aliases=['잠그기', '잠궈라'])
+@bot.command(aliases=['잠그기', '잠궈라', '섭닫'])
 @commands.has_permissions(administrator=True)
 async def 잠금(ctx):
     if set_trello_status("LOCKED"):
@@ -56,28 +56,14 @@ async def 잠금(ctx):
     else:
         await ctx.send("❌ 트렐로 연결에 실패했습니다.")
 
-@bot.command(aliases=['열기', '풀어라'])
-@commands.has_permissions(administrator=True)
-async def 해제(ctx):
-    if set_trello_status("UNLOCKED"):
-        await ctx.send("🔓 **로블록스 서버 봉쇄가 해제되었습니다.** 이제 입장이 가능합니다.")
-    else:
-        await ctx.send("❌ 트렐로 연결에 실패했습니다.")
-
-@bot.command(aliases=['열기', '풀어라'])
+@bot.command(aliases=['해제', '풀어라', '열기'])
 @commands.has_permissions(administrator=True)
 async def 오픈(ctx):
     if set_trello_status("UNLOCKED"):
         await ctx.send("🔓 **로블록스 서버 봉쇄가 해제되었습니다.** 이제 입장이 가능합니다.")
     else:
         await ctx.send("❌ 트렐로 연결에 실패했습니다.")
-@bot.command(aliases=['잠그기', '잠궈라'])
-@commands.has_permissions(administrator=True)
-async def 섭닫(ctx):
-    if set_trello_status("LOCKED"):
-        await ctx.send("🚨 **로블록스 서버가 봉쇄되었습니다.** 모든 플레이어가 추방됩니다.")
-    else:
-        await ctx.send("❌ 트렐로 연결에 실패했습니다.")
+
 @bot.command()
 async def 서버상태(ctx):
     status = get_trello_status()
@@ -90,4 +76,3 @@ async def 서버상태(ctx):
 
 keep_alive()
 bot.run(DISCORD_BOT_TOKEN)
-
