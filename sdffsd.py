@@ -48,7 +48,7 @@ def get_trello_status():
         return response.json().get('name')
     return None
 
-@bot.command(aliases=['잠그기', '잠궈라', '섭닫'])
+@bot.command(aliases=['잠그기', '잠궈라', '섭닫', '봉인', '서버봉인', 'HC하케귀여움'])
 @commands.has_permissions(administrator=True)
 async def 잠금(ctx):
     if set_trello_status("LOCKED"):
@@ -56,7 +56,7 @@ async def 잠금(ctx):
     else:
         await ctx.send("❌ 트렐로 연결에 실패했습니다.")
 
-@bot.command(aliases=['해제', '풀어라', '열기'])
+@bot.command(aliases=['해제', '풀어라', '열기', '봉인해제', '솔바람귀여움'])
 @commands.has_permissions(administrator=True)
 async def 오픈(ctx):
     if set_trello_status("UNLOCKED"):
@@ -76,3 +76,4 @@ async def 서버상태(ctx):
 
 keep_alive()
 bot.run(DISCORD_BOT_TOKEN)
+
