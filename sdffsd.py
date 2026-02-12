@@ -62,6 +62,17 @@ async def 해제(ctx):
 
 @bot.command()
 @commands.has_permissions(administrator=True)
+async def 서버상태(ctx):
+    status = get_trello_status()
+    if status == "LOCKED":
+        await ctx.send("현재 서버 상태: 🚨 **봉쇄됨 (LOCKED)**")
+    elif status == "UNLOCKED":
+        await ctx.send("현재 서버 상태: 🔓 **개방됨 (UNLOCKED)**")
+    else:
+        await ctx.send("❌ 서버 상태를 불러올 수 없습니다. 트렐로 설정을 확인하세요.")
+
+@bot.command()
+@commands.has_permissions(administrator=True)
 async def 열기(ctx):
     if set_trello_status("UNLOCKED"):
         await ctx.send("🔓 **로블록스 서버 봉쇄가 해제되었습니다.** 이제 입장이 가능합니다.")
@@ -86,3 +97,4 @@ async def 잠궈라(ctx):
 
 keep_alive()
 bot.run(DISCORD_BOT_TOKEN)
+
